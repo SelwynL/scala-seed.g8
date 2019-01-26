@@ -1,7 +1,13 @@
 This is a [Giter8][g8] template for Scala.
 
+From public GitHub repo
 ```
-sbt new scala/scala-seed.g8
+sbt new SelwynL/scala-seed.g8
+```
+
+From local repo
+```
+sbt new file://scala-seed.g8
 ```
 
 Template license

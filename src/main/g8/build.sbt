@@ -1,14 +1,23 @@
-import Dependencies._
+logLevel :=  Level.Info
 
-ThisBuild / scalaVersion     := "2.12.8"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
-ThisBuild / organizationName := "example"
-
-lazy val root = (project in file("."))
+lazy val root = project.in(file("."))
   .settings(
-    name := "$name$",
-    libraryDependencies += scalaTest % Test
+    organization  :=  "$organization$",
+    name          :=  "$name$",
+    version       :=  "$projectVersion$",
+    scalaVersion  :=  "$scalaVersion$",
+    description   :=  "$desc$",
+    scalacOptions :=  BuildSettings.compilerOptions,
+    scalacOptions in  (Compile, console) ~= { _.filterNot(Set("-Ywarn-unused-import")) },
+    scalacOptions in  (Test, console)    := (scalacOptions in (Compile, console)).value,
+    javacOptions  :=  BuildSettings.javaCompilerOptions,
+    resolvers     ++= Dependencies.resolutionRepos,
+    shellPrompt   :=  { _ => "$name$> "}
   )
-
-// See https://www.scala-sbt.org/1.x/docs/Using-Sonatype.html for instructions on how to publish to Sonatype.
+  .settings(BuildSettings.wartremoverSettings)
+  .settings(BuildSettings.scalaFmtSettings)
+  .settings(BuildSettings.scalifySettings)
+  .settings(BuildSettings.sbtAssemblySettings)
+  .settings(
+    libraryDependencies ++= Dependencies.Libraries
+  )
