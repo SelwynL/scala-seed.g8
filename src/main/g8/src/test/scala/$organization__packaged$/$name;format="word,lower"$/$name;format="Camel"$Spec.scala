@@ -1,5 +1,13 @@
 package $organization$.$name;format="word,lower"$
 
-object $name;format="Camel"$Main extends App with LazyLogging {
-  logger.info("Hello, $name$!")
+import org.scalatest.{Matchers, WordSpecLike}
+
+class $name;format="Camel"$Spec extends WordSpecLike with Matchers {
+  
+  "$name;format="Camel"$" must {
+
+    "be true" in {
+      true should be(true)
+    }
+  }
 }
